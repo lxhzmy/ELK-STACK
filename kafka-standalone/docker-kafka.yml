@@ -134,7 +134,9 @@ services:
     - "9000:9000"
     restart: always
     environment:
-    - ZK_HOSTS="zoo001:2181"      
+    - ZK_HOSTS="zoo001:2181" 
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock         
 networks:
   backend:
     external:
