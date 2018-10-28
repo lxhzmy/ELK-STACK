@@ -15,7 +15,7 @@ services:
   zoo002:
     image: zookeeper:3.4
     ports:
-    - "2181:2181"
+    - "2182:2181"
     restart: always
     environment:
         ZOO_MY_ID: 2
@@ -27,7 +27,7 @@ services:
   zoo003:
     image: zookeeper:3.4
     ports:
-    - "2181:2181"
+    - "2183:2181"
     restart: always
     environment:
         ZOO_MY_ID: 3
@@ -39,7 +39,7 @@ services:
   zoo004:
     image: zookeeper:3.4
     ports:
-    - "2181:2181"
+    - "2184:2181"
     restart: always
     environment:
         ZOO_MY_ID: 4
@@ -90,7 +90,7 @@ services:
     - KAFKA_ADVERTISED_PORT=9092
     - KAFKA_HOST_NAME=broker002
     - KAFKA_PORT=9092
-    - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2182,zoo003:2183,zoo004:2184
+    - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker002:9092
     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker002:9092
     volumes:
@@ -115,7 +115,7 @@ services:
     - KAFKA_ADVERTISED_PORT=9092
     - KAFKA_HOST_NAME=broker003
     - KAFKA_PORT=9092
-    - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2182,zoo003:2183,zoo004:2184
+    - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker003:9092
     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker003:9092
     volumes:
