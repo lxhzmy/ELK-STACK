@@ -68,6 +68,7 @@ services:
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker001:9092
     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker001:9092
+    - KAFKA_AUTO_CREATE_TOPICS='enable'
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -93,6 +94,7 @@ services:
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker002:9092
     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker002:9092
+    - KAFKA_AUTO_CREATE_TOPICS='enable'    
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -118,6 +120,7 @@ services:
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker003:9092
     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker003:9092
+    - KAFKA_AUTO_CREATE_TOPICS='enable'    
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
