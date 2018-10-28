@@ -135,6 +135,10 @@ services:
     restart: always
     environment:
     - ZK_HOSTS="zoo001:2181" 
+    networks:
+      backend:
+        aliases:
+        - kafka-manager      
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock         
 networks:
