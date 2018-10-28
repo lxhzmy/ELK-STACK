@@ -54,7 +54,7 @@ The following tags are available:
 
 #### [Standalone Mode]<a name="Standalone Mode"></a>
 
-1.1 Kafka、zookeeper
+1.1    Kafka、zookeeper
 
 - docker-kafka.yml:（kafka、zookeeper）
 
@@ -202,7 +202,7 @@ vi /etc/hosts
    ```
   input {
       kafka {
-          bootstrap_servers => ["kafka001:9092"]
+          bootstrap_servers => ["broker001:9092"]
           auto_offset_reset => "latest"
           consumer_threads => 3 # 3个消费线程，默认是1个
           topics => ["log","log-collect"]
@@ -272,7 +272,7 @@ vi /etc/hosts
           # user => "elastic" # 如果选择开启xpack security需要输入帐号密码
           # password => "changeme"
       }
-  
+  }    
    ```
 
     -  logstash.yml
@@ -314,7 +314,7 @@ vi /etc/hosts
         - discovery.type=single-node
         - ES_JAVA_OPTS=-Xms512m -Xmx512m
       volumes:
-      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       deploy:
         placement:
           constraints:
@@ -338,14 +338,14 @@ vi /etc/hosts
           aliases:
             - kibana
       volumes:
-      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+        - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
       depends_on:
         - es001
   
     logstash:
       image: docker.elastic.co/logstash/logstash:6.4.0
       ports:
-        - "5601:5601"
+        - 9600:9600
       restart: always
       environment:
         - LS_JAVA_OPTS=-Xmx512m -Xms512m
@@ -361,7 +361,7 @@ vi /etc/hosts
           aliases:
             - logstash
       depends_on:
-        - elk-elasticsearch
+        - es001
       entrypoint:
         - logstash
         - -f
