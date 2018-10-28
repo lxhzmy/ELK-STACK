@@ -56,7 +56,7 @@ services:
         aliases:
           - logstash
     depends_on:
-      - elk-elasticsearch
+      - es001
     entrypoint:
       - logstash
       - -f
