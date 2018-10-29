@@ -65,7 +65,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es003.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - esdata001:/usr/share/elasticsearch/data
+      - esdata003:/usr/share/elasticsearch/data
     networks:
       backend:
         aliases:
