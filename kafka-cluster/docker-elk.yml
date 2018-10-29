@@ -43,7 +43,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es002.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /data/esdata002:/usr/share/elasticsearch/data
+      - esdata002:/usr/share/elasticsearch/data
     networks:
       backend:
         aliases:
@@ -65,7 +65,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es003.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /data/esdata003:/usr/share/elasticsearch/data
+      - esdata003:/usr/share/elasticsearch/data
     networks:
       backend:
         aliases:
@@ -110,7 +110,19 @@ services:
       - logstash
       - -f
       - /etc/logstash.conf
-
+volumes:
+  esdata001:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /data/esdata001  
+  esdata002:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /data/esdata002      
+  esdata003:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /data/esdata003      
 # docker network create -d=overlay --attachable backend
 # docker network create --opt encrypted -d=overlay --attachable --subnet 10.10.0.0/16 backend
 networks:
