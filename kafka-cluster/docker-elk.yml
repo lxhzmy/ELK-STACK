@@ -17,7 +17,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es001.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /data/esdata001:/usr/share/elasticsearch/data
+      - esdata001:/usr/share/elasticsearch/data
     deploy:
       placement:
         constraints:
