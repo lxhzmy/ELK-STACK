@@ -112,15 +112,15 @@ services:
       - /etc/logstash.conf
 volumes:
   esdata001:
-    driver: local-persist
+    driver: local
     driver_opts:
       mountpoint: /data/esdata001  
   esdata002:
-    driver: local-persist
+    driver: local
     driver_opts:
       mountpoint: /data/esdata002      
   esdata003:
-    driver: local-persist
+    driver: local
     driver_opts:
       mountpoint: /data/esdata003      
 # docker network create -d=overlay --attachable backend
