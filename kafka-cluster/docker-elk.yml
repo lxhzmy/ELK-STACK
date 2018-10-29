@@ -113,16 +113,10 @@ services:
 volumes:
   esdata001:
     driver: local
-    driver_opts:
-      mountpoint: /data/esdata001  
   esdata002:
-    driver: local
-    driver_opts:
-      mountpoint: /data/esdata002      
+    driver: local   
   esdata003:
-    driver: local
-    driver_opts:
-      mountpoint: /data/esdata003      
+    driver: local  
 # docker network create -d=overlay --attachable backend
 # docker network create --opt encrypted -d=overlay --attachable --subnet 10.10.0.0/16 backend
 networks:
