@@ -1,0 +1,5 @@
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.url: http://es001:9200 # Docker版的Logstash此配置的默认地址是http://elasticsearch:9200
+
+# xpack.monitoring.elasticsearch.username: "elastic" # 如果选择开启xpack security需要输入帐号密码
+# xpack.monitoring.elasticsearch.password: "changeme"
