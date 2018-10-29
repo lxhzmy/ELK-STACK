@@ -17,7 +17,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es001.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - esdata001:/usr/share/elasticsearch/data
+      - /data/esdata001:/usr/share/elasticsearch/data
     deploy:
       placement:
         constraints:
@@ -43,7 +43,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es002.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - esdata002:/usr/share/elasticsearch/data
+      - /data/esdata002:/usr/share/elasticsearch/data
     networks:
       backend:
         aliases:
@@ -65,7 +65,7 @@ services:
         hard: 65536        
     volumes:
       - ./config/es003.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - esdata003:/usr/share/elasticsearch/data
+      - /data/esdata003:/usr/share/elasticsearch/data
     networks:
       backend:
         aliases:
