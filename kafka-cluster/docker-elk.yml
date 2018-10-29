@@ -3,13 +3,21 @@ services:
   es001:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
     ports:
-      - "9200:9200"
+      - 9200:9200
+      - 9300:9300
     restart: always
     environment:
-      - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
     volumes:
-      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./config/es001.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - esdata001:/usr/share/elasticsearch/data
     deploy:
       placement:
         constraints:
@@ -18,16 +26,55 @@ services:
       backend:
         aliases:
           - es001
-
+  es002:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    ports:
+      - 9201:9200
+      - 9301:9300
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
+    volumes:
+      - ./config/es002.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - esdata002:/usr/share/elasticsearch/data
+    networks:
+      backend:
+        aliases:
+          - es002
+  es003:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    ports:
+      - 9202:9200
+      - 9302:9300
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
+    volumes:
+      - ./config/es003.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - esdata001:/usr/share/elasticsearch/data
+    networks:
+      backend:
+        aliases:
+          - es003          
   kibana:
     image: docker.elastic.co/kibana/kibana:6.4.0
     ports:
       - "5601:5601"
     restart: always
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
@@ -57,6 +104,8 @@ services:
           - logstash
     depends_on:
       - es001
+      - es002
+      - es003            
     entrypoint:
       - logstash
       - -f
