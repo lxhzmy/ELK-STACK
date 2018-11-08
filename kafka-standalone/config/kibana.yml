@@ -4,3 +4,5 @@ elasticsearch.url: http://es001:9200
 xpack.monitoring.ui.container.elasticsearch.enabled: true
 #elasticsearch.username: "elastic"
 #elasticsearch.password: "changeme"
+
+i18n.defaultLocale: "ch"
