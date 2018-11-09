@@ -60,14 +60,12 @@ services:
       - zoo003
       - zoo004           
     environment:
-    - KAFKA_BROKER_ID=1  
-    - KAFKA_ADVERTISED_HOST_NAME=broker001
-    - KAFKA_ADVERTISED_PORT=9092        
+    - KAFKA_BROKER_ID=1         
     - KAFKA_HOST_NAME=broker001
     - KAFKA_PORT=9092
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker001:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker001:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.204.53:9091
     - KAFKA_AUTO_CREATE_TOPICS='enable'
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
@@ -87,13 +85,11 @@ services:
       - zoo004           
     environment:
     - KAFKA_BROKER_ID=2      
-    - KAFKA_ADVERTISED_HOST_NAME=broker002  
-    - KAFKA_ADVERTISED_PORT=9092
     - KAFKA_HOST_NAME=broker002
     - KAFKA_PORT=9092
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker002:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker002:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.204.53:9092
     - KAFKA_AUTO_CREATE_TOPICS='enable'    
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
@@ -113,13 +109,11 @@ services:
       - zoo004           
     environment:
     - KAFKA_BROKER_ID=3      
-    - KAFKA_ADVERTISED_HOST_NAME=broker003  
-    - KAFKA_ADVERTISED_PORT=9092
     - KAFKA_HOST_NAME=broker003
     - KAFKA_PORT=9092
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker003:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker003:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.204.53:9092
     - KAFKA_AUTO_CREATE_TOPICS='enable'    
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
