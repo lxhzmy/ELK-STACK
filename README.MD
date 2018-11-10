@@ -74,31 +74,31 @@ docker exec -it containerId/Name bash
 - 创建一个主题
 
  ```
-/opt/kafka/bin/kafka-topics.sh --create --zookeeper 10.164.201.27:2181 --replication-factor 1 --partitions 1 --topic log
+/opt/kafka/bin/kafka-topics.sh --create --zookeeper zoo001:2181,zoo002:2181,zoo003,2181 --replication-factor 3 --partitions 3 --topic lla
  ```
 
 - 查看刚才创建的主题
 
  ```
-/opt/kafka/bin/kafka-topics.sh --list --zookeeper zoo001:2181
+/opt/kafka/bin/kafka-topics.sh --list --zookeeper zoo001:2181,zoo002:2181,zoo003:2181
  ```
 
 - 描述刚才创建的主题详情:
 
  ```
- /opt/kafka/bin/kafka-topics.sh --describe --zookeeper zoo001:2181 --topic log
+ /opt/kafka/bin/kafka-topics.sh --describe --zookeeper zoo001:2181,zoo002:2181,zoo003:2181 --topic logtest
  ```
 
 - kafka 生产消息:
 
  ```
- /opt/kafka/bin/kafka-console-producer.sh --broker-list zoo001:9092 --topic log
+ /opt/kafka/bin/kafka-console-producer.sh --broker-list broker002:9092,broker001:9092,broker003:9092 --topic coka
  ```
 
 - 消费消息:
 
  ```
- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server zoo001:9092 --from-beginning --topic log
+ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server broker002:9092,broker001:9092,broker003:9092 --from-beginning --topic ddd
  ```
 
 - 更改agent所在机器的 /etc/filebeat/fileBeat.yml:
