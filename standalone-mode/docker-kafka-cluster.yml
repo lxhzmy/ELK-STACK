@@ -44,8 +44,7 @@ services:
     depends_on:
       - zoo001
       - zoo002
-      - zoo003
-      - zoo004           
+      - zoo003          
     environment:
     - KAFKA_BROKER_ID=1         
     - KAFKA_HOST_NAME=broker001
@@ -68,8 +67,7 @@ services:
     depends_on:
       - zoo001
       - zoo002
-      - zoo003
-      - zoo004           
+      - zoo003          
     environment:
     - KAFKA_BROKER_ID=2      
     - KAFKA_HOST_NAME=broker002
@@ -92,8 +90,7 @@ services:
     depends_on:
       - zoo001
       - zoo002
-      - zoo003
-      - zoo004           
+      - zoo003          
     environment:
     - KAFKA_BROKER_ID=3      
     - KAFKA_HOST_NAME=broker003
