@@ -13,10 +13,6 @@ services:
       - ./crack/x-pack-core-6.4.0.jar:/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.4.0.jar
       - ./crack/license.json:/usr/share/elasticsearch/license.json
       - /data/esdata001:/usr/share/elasticsearch/data
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
@@ -27,10 +23,6 @@ services:
     ports:
       - "5601:5601"
     restart: always
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
@@ -50,10 +42,6 @@ services:
     volumes:
       - ./config/logstash.conf:/etc/logstash.conf
       - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
