@@ -129,7 +129,7 @@ services:
         - kafka-manager      
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock     
-services:
+
   portainer:
     image: portainer/portainer
     ports:
