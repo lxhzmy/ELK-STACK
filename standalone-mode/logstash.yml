@@ -8,7 +8,7 @@ services:
     environment:
       - LS_JAVA_OPTS=-Xmx512m -Xms512m
     volumes:
-      - ./config/logstash.conf:/etc/logstash.conf
+      - ./config/logstash-test.conf:/etc/logstash.conf
       - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
     networks:
       backend:
