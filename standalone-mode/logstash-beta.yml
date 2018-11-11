@@ -9,7 +9,7 @@ services:
       - LS_JAVA_OPTS=-Xmx512m -Xms512m
     volumes:
       - ./config/logstash-test.conf:/etc/logstash.conf
-      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash-test.yml:/usr/share/logstash/config/logstash.yml
     networks:
       backend:
         aliases:
