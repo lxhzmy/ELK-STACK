@@ -19,7 +19,7 @@ filebeat.prospectors:
       service: outreach
 
 output.kafka:
-  hosts: ["10.164.204.153:9091"]
+  hosts: ["10.164.201.27:9091","10.164.201.27:9092","10.164.201.27:9093"]
   topic: '%{[fields][service]}'
   partition.round_robin:
     reachable_only: false
