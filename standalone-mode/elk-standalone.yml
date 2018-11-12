@@ -1,7 +1,7 @@
 version: '3'
 services:
   es001:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    image: elasticsearch:6.4.0
     ports:
       - "9200:9200"
     restart: always
@@ -13,24 +13,16 @@ services:
       - ./crack/x-pack-core-6.4.0.jar:/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.4.0.jar
       - ./crack/license.json:/usr/share/elasticsearch/license.json
       - /data/esdata001:/usr/share/elasticsearch/data
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
           - es001
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.0
+    image: kibana:6.4.0
     ports:
       - "5601:5601"
     restart: always
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:
@@ -41,7 +33,7 @@ services:
       - es001
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.0
+    image: logstash:6.4.0
     ports:
       - 9600:9600
     restart: always
@@ -50,10 +42,6 @@ services:
     volumes:
       - ./config/logstash.conf:/etc/logstash.conf
       - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
     networks:
       backend:
         aliases:

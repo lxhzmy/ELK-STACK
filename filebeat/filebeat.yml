@@ -1,0 +1,30 @@
+filebeat.prospectors:
+- paths:
+    - /data/logs/loanplatform/**/*.log
+  input_type: log
+  enabled: true
+  multiline.pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+  multiline.negate: true
+  multiline.match: after
+  fields:
+      service: loanplatform
+- paths:
+    - /data/logs/outreach*/**/*.log
+  input_type: log
+  enabled: false
+  multiline.pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+  multiline.negate: true
+  multiline.match: after
+  fields:
+      service: outreach
+
+output.kafka:
+  hosts: ["10.164.201.27:9091","10.164.201.27:9092","10.164.201.27:9093"]
+  topic: '%{[fields][service]}'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  max_message_bytes: 1000000
+
+#output.console:
+#  pretty: true
