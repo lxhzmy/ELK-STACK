@@ -484,3 +484,107 @@ Docker 监控页面：
 **如果还有不明白的，咨询我 邮件，我有时间会耐心回复的。**
 
 以上，谢谢！
+
+--------------------------------------------------------华丽的分割线-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+### 常用测试命令
+
+#### Kafka-test
+
+- 展示docker现有容器:
+
+ ```
+docker ps 
+ ```
+
+- 进入kafka容器
+
+ ```
+docker exec -it containerId/Name bash
+ ```
+
+- 创建一个主题
+
+ ```
+/opt/kafka/bin/kafka-topics.sh --create --zookeeper zoo001:2181,zoo002:2181,zoo003,2181 --replication-factor 3 --partitions 3 --topic ms
+ ```
+
+- 查看刚才创建的主题
+
+ ```
+/opt/kafka/bin/kafka-topics.sh --list --zookeeper zoo001:2181,zoo002:2181,zoo003:2181
+ ```
+
+- 描述刚才创建的主题详情:
+
+ ```
+ /opt/kafka/bin/kafka-topics.sh --describe --zookeeper zoo001:2181,zoo002:2181,zoo003:2181 --topic lla
+ ```
+
+- kafka 生产消息:
+
+ ```
+ /opt/kafka/bin/kafka-console-producer.sh --broker-list broker002:9092,broker001:9092,broker003:9092 --topic lla
+ ```
+
+- 消费消息:
+
+ ```
+ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server broker002:9092,broker001:9092,broker003:9092 --from-beginning --topic lla
+ ```
+
+
+
+#### 一键停用所有docker容器:
+
+查看运行容器
+
+```
+docker ps1
+```
+
+查看所有容器
+
+```
+docker ps -a1
+```
+
+进入容器
+
+其中字符串为容器ID:
+
+```
+docker exec -it d27bd3008ad9 /bin/bash1
+```
+
+停用全部运行中的容器:
+
+```
+docker stop $(docker ps -q)
+```
+
+删除全部容器：
+
+```
+docker rm $(docker ps -aq)
+```
+
+一条命令实现停用并删除容器：
+
+```
+docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+
+```
+
+ 
+
