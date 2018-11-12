@@ -60,14 +60,10 @@ services:
       - zoo003
       - zoo004           
     environment:
-    - KAFKA_BROKER_ID=1  
-    - KAFKA_ADVERTISED_HOST_NAME=broker001
-    - KAFKA_ADVERTISED_PORT=9092        
-    - KAFKA_HOST_NAME=broker001
-    - KAFKA_PORT=9092
+    - KAFKA_BROKER_ID=1        
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker001:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker001:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.201.27:9091
     - KAFKA_AUTO_CREATE_TOPICS='enable'
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
@@ -86,15 +82,11 @@ services:
       - zoo003
       - zoo004           
     environment:
-    - KAFKA_BROKER_ID=2      
-    - KAFKA_ADVERTISED_HOST_NAME=broker002  
-    - KAFKA_ADVERTISED_PORT=9092
-    - KAFKA_HOST_NAME=broker002
-    - KAFKA_PORT=9092
+    - KAFKA_BROKER_ID=2        
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker002:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker002:9092
-    - KAFKA_AUTO_CREATE_TOPICS='enable'    
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.201.27:9092
+    - KAFKA_AUTO_CREATE_TOPICS='enable'  
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -113,13 +105,9 @@ services:
       - zoo004           
     environment:
     - KAFKA_BROKER_ID=3      
-    - KAFKA_ADVERTISED_HOST_NAME=broker003  
-    - KAFKA_ADVERTISED_PORT=9092
-    - KAFKA_HOST_NAME=broker003
-    - KAFKA_PORT=9092
     - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
     - KAFKA_LISTENERS=PLAINTEXT://broker003:9092
-    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker003:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.201.27:9093
     - KAFKA_AUTO_CREATE_TOPICS='enable'    
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
@@ -140,7 +128,20 @@ services:
         aliases:
         - kafka-manager      
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock         
+    - /var/run/docker.sock:/var/run/docker.sock     
+
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9001:9000"
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+          
 networks:
   backend:
     external:
