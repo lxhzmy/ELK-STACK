@@ -8,7 +8,7 @@
 
 ### 应用架构拓扑图:
 
-![](D:\GITLAB\ELK-STACK\assets\efk.png)
+![](.\assets\efk.png)
 
 整体架构主要分为 5 个模块，分别提供不同的功能
 
@@ -143,6 +143,96 @@ service filebeat start
 
 
 #### Kafla  cluster
+
+##### 单机版配置
+
+kafka-standalone.yml
+
+```
+version: '3.4'
+services:
+  zoo001:
+    image: zookeeper:3.4
+    ports:
+    - "2181:2181"
+    restart: always
+    environment:
+        ZOO_MY_ID: 1
+        ZOO_SERVERS: server.1=zoo001:2888:3888
+    networks:
+      backend:
+        aliases:
+        - zoo001
+
+  broker001:
+    image: wurstmeister/kafka:1.1.0 
+    ports:
+    - "9091:9092"
+    restart: always
+    depends_on:
+      - zoo001
+    environment:
+    - KAFKA_BROKER_ID=1        
+    - KAFKA_ZOOKEEPER_CONNECT=zoo001:2181
+    - KAFKA_LISTENERS=PLAINTEXT://broker001:9092
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.164.204.153:9091
+    - KAFKA_AUTO_CREATE_TOPICS='enable'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      backend:
+        aliases:
+        - broker001
+  kafka-manager:
+    image: sheepkiller/kafka-manager:1.3.0.4
+    ports:
+    - "9000:9000"
+    restart: always
+    environment:
+    - ZK_HOSTS=zoo001:2181
+    networks:
+      backend:
+        aliases:
+        - kafka-manager      
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9001:9000"
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+
+networks:
+  backend:
+    external:
+      name: backend
+```
+
+容器启动:
+
+```
+docker-compose -f  kafka-standalone.yml up 
+```
+
+作用: 
+
+​	zookeeper 开放内外端口映射2181
+
+​	kafka 容器内端口9092，外网端口9091.
+
+​	KAFKA_LISTENERS 是kafka配置的内网hosts
+
+​	KAFKA_ADVERTISED_LISTENERS 是kafka配置的外网访问ip:port 
+
+
+
+##### 集群版配置
 
 因为kafka docker构建的 ，所以 这里直接上docker 配置文件:
 
@@ -305,11 +395,21 @@ networks:
 docker-compose -f kafka-cluster.yml up 
 ```
 
-![](D:\GITLAB\ELK-STACK\assets\topics.png)
+![](.\assets\topics.png)
 
 如果filebeat推送数据消费不了，请对话题添加分区增加并发消费能力 大于当前分区数即可：
 
 ![1542035848797](C:\Users\JamesBond\AppData\Roaming\Typora\typora-user-images\1542035848797.png)
+
+作用: 
+
+​	zookeeper集群内网访问 zoo001:2181,zoo002:2181,zoo003:2181,zoo004:2181
+
+​	kafka 集群对外访问：10.164.201.27:9091,10.164.201.27:9092,10.164.201.27:9093
+
+​	KAFKA_LISTENERS 是kafka配置的内网hosts
+
+​	KAFKA_ADVERTISED_LISTENERS 是kafka配置的外网访问ip:port 
 
 #### ELK  
 
@@ -325,7 +425,7 @@ services:
     restart: always
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
     volumes:
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /data/esdata001:/usr/share/elasticsearch/data
@@ -379,6 +479,10 @@ networks:
       name: backend
 
 ```
+
+作用: 
+
+搜索引擎es : 单节点 ， 1024M的堆内存
 
 
 
@@ -471,11 +575,11 @@ output {
 
 ELK具体页面展示:
 
-![](D:\GITLAB\ELK-STACK\assets\kibana.png)
+![](.\assets\kibana.png)
 
 Docker 监控页面：
 
-![](D:\GITLAB\ELK-STACK\assets\docker-monitor-ui.png)
+![](.\assets\docker-monitor-ui.png)
 
 
 
