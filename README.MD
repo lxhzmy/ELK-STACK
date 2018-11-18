@@ -654,13 +654,13 @@ docker exec -it containerId/Name bash
 查看运行容器
 
 ```
-docker ps1
+docker ps
 ```
 
 查看所有容器
 
 ```
-docker ps -a1
+docker ps -a
 ```
 
 进入容器
@@ -692,3 +692,10 @@ docker stop $(docker ps -q) & docker rm $(docker ps -aq)
 
  
 
+### 剩下要做的事情：
+
+- ES指定多个data目录进行存储
+- 汉化
+- 冷热存储X-PACK功能实现
+- 搭建教程完善
+- 文件备份导出方式，当文件两条大的时候怎么按照时间点，拷贝出来。那么导出来的格式是什么样的呢？
