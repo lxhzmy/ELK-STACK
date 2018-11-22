@@ -70,7 +70,7 @@ services:
         aliases:
           - es003          
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.0
+    image:  kibana:6.4.0
     ports:
       - "5601:5601"
     restart: always
@@ -84,7 +84,7 @@ services:
       - es001
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.0
+    image:  logstash:6.4.0
     ports:
       - 9600:9600
     restart: always
