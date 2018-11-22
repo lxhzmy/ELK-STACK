@@ -1,0 +1,113 @@
+version: '3'
+services:
+  es001:
+    image: elasticsearch:6.4.0
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
+    volumes:
+      - ./config/es001.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/es001:/data/es001
+      - /data/es002:/data/es002      
+    networks:
+      backend:
+        aliases:
+          - es001
+  es002:
+    image: elasticsearch:6.4.0
+    ports:
+      - 9201:9200
+      - 9301:9300
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
+    volumes:
+      - ./config/es002.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/es003:/data/es003
+      - /data/es004:/data/es004       
+    networks:
+      backend:
+        aliases:
+          - es002
+  es003:
+    image: elasticsearch:6.4.0
+    ports:
+      - 9202:9200
+      - 9302:9300
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536        
+    volumes:
+      - ./config/es003.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/es005:/data/es005
+      - /data/es006:/data/es006       
+    networks:
+      backend:
+        aliases:
+          - es003          
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.0
+    ports:
+      - "5601:5601"
+    restart: always
+    networks:
+      backend:
+        aliases:
+          - kibana
+    volumes:
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - es001
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.4.0
+    ports:
+      - 9600:9600
+    restart: always
+    environment:
+      - LS_JAVA_OPTS=-Xmx512m -Xms512m
+    volumes:
+      - ./config/logstash.conf:/etc/logstash.conf
+      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
+    networks:
+      backend:
+        aliases:
+          - logstash
+    depends_on:
+      - es001
+      - es002
+      - es003            
+    entrypoint:
+      - logstash
+      - -f
+      - /etc/logstash.conf 
+# docker network create -d=overlay --attachable backend
+# docker network create --opt encrypted -d=overlay --attachable --subnet 10.10.0.0/16 backend
+networks:
+  backend:
+    external:
+      name: backend
