@@ -83,28 +83,28 @@ services:
     depends_on:
       - es001
 
-  logstash:
-    image:  logstash:6.4.0
-    ports:
-      - 9600:9600
-    restart: always
-    environment:
-      - LS_JAVA_OPTS=-Xmx512m -Xms512m
-    volumes:
-      - ./config/logstash.conf:/etc/logstash.conf
-      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    networks:
-      backend:
-        aliases:
-          - logstash
-    depends_on:
-      - es001
-      - es002
-      - es003            
-    entrypoint:
-      - logstash
-      - -f
-      - /etc/logstash.conf 
+  # logstash:
+  #   image:  logstash:6.4.0
+  #   ports:
+  #     - 9600:9600
+  #   restart: always
+  #   environment:
+  #     - LS_JAVA_OPTS=-Xmx512m -Xms512m
+  #   volumes:
+  #     - ./config/logstash.conf:/etc/logstash.conf
+  #     - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
+  #   networks:
+  #     backend:
+  #       aliases:
+  #         - logstash
+  #   depends_on:
+  #     - es001
+  #     - es002
+  #     - es003            
+  #   entrypoint:
+  #     - logstash
+  #     - -f
+  #     - /etc/logstash.conf 
 # docker network create -d=overlay --attachable backend
 # docker network create --opt encrypted -d=overlay --attachable --subnet 10.10.0.0/16 backend
 networks:
