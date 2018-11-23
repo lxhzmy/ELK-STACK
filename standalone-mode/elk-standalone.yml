@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
     volumes:
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./crack/x-pack-core-6.4.0.jar:/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.4.0.jar
