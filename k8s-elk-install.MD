@@ -1,0 +1,1 @@
+这里是高级版 ELK 使用kubernetes 安装的。集群版
