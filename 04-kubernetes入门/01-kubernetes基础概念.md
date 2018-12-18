@@ -388,6 +388,8 @@ volumes:
 
 ​	 可参考：http://orchome.com/1278
 
+
+
 ## Namespace 
 
 Namespace（命名空间）是Kubernetes系统中的另一个非常重要的概念，Namespace在很多情况下用于实现多租户的资源隔离。Nameaspace通过将集群内部的资源对象“分配”到不同的Namespce中，形成逻辑上分组的不同项目、小组或用户组，便于不同的分组在共享使用整个集群的资源的同时还能被分别管理。
@@ -448,5 +450,14 @@ busybox   1/1       Running   0          2m
 ```
 
 当我们給每个租户创建一个Namespace来实现多租户的资源隔离时，还能结合Kubernetes的资源配额管理，限定不同租户能占用的资源，例如CPU使用量、内存使用量等。关于资源配额管理等问题，
+
+##  Annotation
+
+用Annotation来记录的信息如下。
+
+- build信息、release信息、Docker镜像信息等，例如时间戳、release id号、PR号、镜像hash值、docker registry地址等。
+- 日志库、监控库、分析库等资源库的地址信息。
+- 程序调试工具信息，例如工具、版本号等。
+- 团队等联系信息，例如电话号码、负责人名称、网址等
 
  
