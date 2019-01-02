@@ -9,10 +9,6 @@ version: '3'
     volumes:
       - ./config/logstash.conf:/etc/logstash.conf
       - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    networks:
-      backend:
-        aliases:
-          - logstash
     entrypoint:
       - logstash
       - -f
