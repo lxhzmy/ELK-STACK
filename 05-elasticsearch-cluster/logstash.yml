@@ -13,8 +13,6 @@ version: '3'
       backend:
         aliases:
           - logstash
-    depends_on:
-      - es001
     entrypoint:
       - logstash
       - -f
