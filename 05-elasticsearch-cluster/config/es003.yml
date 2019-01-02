@@ -1,0 +1,31 @@
+cluster.name: es-cluster
+
+node.name: es003
+
+path.data: /data/elasticsearch/data1,/data/elasticsearch/data2,/data/elasticsearch/data3
+path.logs: /data/elasticsearch/log1
+
+discovery.zen.ping_timeout: 30s
+discovery.zen.ping.unicast.hosts: ['10.164.201.27','10.164.201.79','10.164.201.80']
+#discovery.zen.ping.unicast.hosts: [cloud001,cloud002,cloud003,cloud004,bigdata-01,oradb,'cloud001:9301','cloud002:9301','cloud003:9301','cloud004:9301','bigdata-01:9301','oradb:9301','cloud001:9302','cloud002:9302','cloud003:9302','cloud004:9302','bigdata-01:9302','oradb:9302']
+#discovery.zen.ping.unicast.hosts: [cloud001,cloud002,cloud003,cloud004,'cloud001:9301','cloud002:9301','cloud003:9301','cloud004:9301','cloud001:9302','cloud002:9302','cloud003:9302','cloud004:9302']
+
+network.bind_host: 0.0.0.0
+#network.publish_host: 10.164.194.40
+
+transport.tcp.port: 9300
+http.port: 9200
+node.master: true
+node.data: true
+node.max_local_storage_nodes: 3
+# gateway.recover_after_nodes: 5
+# gateway.expected_nodes: 5
+# gateway.recover_after_time: 10m
+discovery.zen.minimum_master_nodes: 2
+
+cluster.info.update.interval: 1m
+
+bootstrap.system_call_filter: false
+bootstrap.memory_lock: false
+http.cors.enabled: false
+http.cors.allow-origin: "*"
