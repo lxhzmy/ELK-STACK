@@ -3,7 +3,7 @@ cluster.name: es-cluster
 node.name: es001
 
 path.data: /data/elasticsearch/data1,/data/elasticsearch/data2,/data/elasticsearch/data3
-path.logs: /data/elasticsearch/log1
+#path.logs: /data/elasticsearch/log1
 
 discovery.zen.ping_timeout: 30s
 discovery.zen.ping.unicast.hosts: ['10.164.201.27','10.164.201.79','10.164.201.80']
