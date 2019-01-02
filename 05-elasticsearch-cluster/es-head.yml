@@ -1,6 +1,6 @@
 version: '3'
 services:
-  logstash:
+  es-head:
     image: mobz/elasticsearch-head:5
     ports:
       - 9100:9100
