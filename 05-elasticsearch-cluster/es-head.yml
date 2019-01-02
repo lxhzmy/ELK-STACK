@@ -1,0 +1,7 @@
+version: '3'
+services:
+  logstash:
+    image: mobz/elasticsearch-head:5
+    ports:
+      - 9100:9100
+    restart: always
