@@ -11,7 +11,7 @@ discovery.zen.ping.unicast.hosts: ['10.164.201.27:9300','10.164.201.79:9300','10
 #discovery.zen.ping.unicast.hosts: [cloud001,cloud002,cloud003,cloud004,'cloud001:9301','cloud002:9301','cloud003:9301','cloud004:9301','cloud001:9302','cloud002:9302','cloud003:9302','cloud004:9302']
 
 network.bind_host: 0.0.0.0
-network.publish_host: 0.0.0.0
+network.publish_host: 10.164.201.79
 
 transport.tcp.port: 9300
 http.port: 9200
