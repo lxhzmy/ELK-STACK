@@ -20,3 +20,6 @@ services:
       - /data/elasticsearch/data1:/data/elasticsearch/data1
       - /data/elasticsearch/data2:/data/elasticsearch/data2
       - /data/elasticsearch/data3:/data/elasticsearch/data3
+      - /data/elasticsearch/log:/data/elasticsearch/log
+      - /mount/es-snapshot-repo:/mount/es-snapshot-repo
+ 
