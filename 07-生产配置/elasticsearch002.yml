@@ -22,7 +22,7 @@ services:
         soft: 65536
         hard: 65536        
     volumes:
-      - ./config/es_conf.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./config/es_conf2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /data1/elasticsearch/data:/data/elasticsearch/data1
       - /data2/elasticsearch/data:/data/elasticsearch/data2
       - /data3/elasticsearch/data:/data/elasticsearch/data3
