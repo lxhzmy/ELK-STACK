@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kibana:
+    image: 172.20.164.227:5000/kibana:6.4.0
+    ports:
+      - "32601:5601"
+    restart: always
+    volumes:
+      - ./config/kibana_conf.yml:/usr/share/kibana/config/kibana.yml       
