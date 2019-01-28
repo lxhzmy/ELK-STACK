@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   zoo002:
-    image: zookeeper:3.4
+    image: 172.20.164.227:5000/zookeeper:3.4
     ports:
     - "2181:2181"
     - "2888:2888"
@@ -11,7 +11,7 @@ services:
         ZOO_MY_ID: 2
         ZOO_SERVERS: server.1=172.20.164.1:2888:3888 server.2=172.20.164.2:2888:3888 server.3=172.20.164.3:2888:3888 
   broker002:
-    image: wurstmeister/kafka:1.1.0 
+    image: 172.20.164.227:5000/wurstmeister/kafka:1.1.0 
     ports:
     - "9092:9092"
     restart: always
