@@ -1,7 +1,7 @@
 version: '3'
 services:
   logstash:
-    image: logstash:6.4.0
+    image: 172.20.164.227:5000/logstash:6.4.0
     ports:
       - 9600:9600
     restart: always

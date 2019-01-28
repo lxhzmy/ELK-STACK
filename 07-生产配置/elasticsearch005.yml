@@ -1,7 +1,7 @@
 version: '3'
 services:
   es001:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    image: 172.20.164.227:5000/elasticsearch:6.4.0
     ports:
       - 9200:9200
       - 9300:9300
