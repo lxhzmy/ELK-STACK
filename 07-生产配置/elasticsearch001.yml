@@ -8,10 +8,10 @@ services:
     restart: always
     environment:
       - node.name=es001
+      - network.publish_host=172.20.164.1        
       - ES_JAVA_OPTS=-Xms10g -Xmx10g
       - path.data=/data/elasticsearch/data1,/data/elasticsearch/data2,/data/elasticsearch/data3,/data/elasticsearch/data4,/data/elasticsearch/data5
       - discovery.zen.ping.unicast.hosts='172.20.164.1:9300','172.20.164.2:9300','172.20.164.3:9300'
-      - network.publish_host=172.20.164.1
       - node.master=true
       - node.data=true
     ulimits:

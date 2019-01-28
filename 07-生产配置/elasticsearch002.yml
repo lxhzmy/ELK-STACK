@@ -9,9 +9,9 @@ services:
     environment:
       - node.name=es002
       - ES_JAVA_OPTS=-Xms10g -Xmx10g
+      - network.publish_host=172.20.164.2      
       - path.data=/data/elasticsearch/data1,/data/elasticsearch/data2,/data/elasticsearch/data3,/data/elasticsearch/data4,/data/elasticsearch/data5
       - discovery.zen.ping.unicast.hosts='172.20.164.1:9300','172.20.164.2:9300','172.20.164.3:9300'
-      - network.publish_host=172.20.164.2
       - node.master=true
       - node.data=true
     ulimits:
