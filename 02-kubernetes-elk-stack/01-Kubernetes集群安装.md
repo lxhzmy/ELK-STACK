@@ -68,6 +68,7 @@ Swap:             0           0           0
 ```
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+s
 sudo yum makecache fast
 yum list docker-ce --showduplicates | sort -r
 
@@ -138,7 +139,7 @@ EOF
 DOCKER_CGROUPS=$(docker info | grep 'Cgroup' | cut -d' ' -f3)
 echo $DOCKER_CGROUPS
 cat >/etc/sysconfig/kubelet<<EOF
-KUBELET_EXTRA_ARGS="--cgroup-driver=$DOCKER_CGROUPS --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1"
+KUBELET_EXTRA_ARGS="--cgroup-driver=$DOCKER_CGROUPS --pod-infra-container-image=172.20.164.227:5000/registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1"
 EOF
 
 # 启动
@@ -162,9 +163,9 @@ vi /etc/kubernetes/kubeadm-master.config
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
 kubernetesVersion: v1.12.0
-imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers #这里是访问国内的镜像加速，因为google无法访问。
+imageRepository: 172.20.164.227:5000/registry.cn-hangzhou.aliyuncs.com/google_containers #这里是访问国内的镜像加速，因为google无法访问。
 api:
-  advertiseAddress: 192.168.0.101 #这里换成你的master ip
+  advertiseAddress: 172.20.164.5 #这里换成你的master ip
 
 controllerManagerExtraArgs:
   node-monitor-grace-period: 10s
@@ -189,7 +190,7 @@ kubeProxy:
 
 直接删除/var/lib/etcd文件夹
 
-**如果初始化过程出现问题，使用如下命令重置：**
+### **初始化重置：**
 
 kubeadm reset
 
